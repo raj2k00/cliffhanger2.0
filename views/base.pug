@@ -1,0 +1,32 @@
+doctype html
+html(lang="en")
+  head
+    block head 
+      meta(charset="UTF-8")
+      meta(http-equiv="X-UA-Compatible", content="IE=edge")
+      meta(name="viewport", content="width=device-width, initial-scale=1.0")
+      link(rel="icon", type="image/png", sizes="32x32", href="/img/favicon-32x32.png")
+      link(rel="stylesheet", href="/css/style.css")
+      link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
+      link(rel="preconnect", href="https://fonts.googleapis.com")
+      link(rel="preconnect", href="https://fonts.gstatic.com", crossorigin)
+      link(href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400&family=Roboto+Slab:wght@100;200;300;400;500;600&family=Sacramento&display=swap", rel="stylesheet")
+      title Cliffhanger | #{title}
+
+
+  body(data-alert=`${alert ? alert : ''}`)
+    // HEADER
+    include _header
+
+    // CONTENT
+    block content
+      h1 This is a placeholder heading
+
+    // FOOTER
+    include _footer
+    
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+    script(src="/js/imageUpload.js") 
+    script(src="/js/main.js") 
+
+  

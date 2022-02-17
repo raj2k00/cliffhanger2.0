@@ -1,0 +1,51 @@
+[{
+		"_id":"61ed7e4a3c05a74b3559bb4a",
+		"name": "Mohan Raj G",
+		"email": "admin@cliffhanger.com",
+		"about":"Hello everyone! I'm Mohanraj, Web Developer and Designer from India. I'm Interested in Technology, Science and Space 😋",
+		"role": "admin",
+		"active": true,
+		"photo": "admin-1.jpg",
+		"password": "$2a$12$Q0grHjH9PXc6SxivC8m12.2mZJ9BbKcgFpwSG4Y1ZEII8HJVzWeyS"
+	},
+	{
+		"_id":"61ed7e4a3c05a74b3559bb4b",
+		"name": "Otaku",
+		"email": "otaku@example.com",
+		"about":"Hello there. I'm Otaku Anime Addict. Interested in writing and watching Anime (as you guessed already 😜), Manga and Old Cartoons 😋",
+		"role": "user",
+		"active": true,
+		"photo": "user-2.jpg",
+		"password": "$2a$12$hP1h2pnNp7wgyZNRwPsOTeZuNzWBv7vHmsR3DT/OaPSUBQT.y0S.."
+	},
+	{
+		"_id":"61ed7e4a3c05a74b3559bb4c",
+		"name": "Jonas",
+		"email": "jonas@example.com",
+		"about":"Hi there, I'm Jonas Lionheart here. I'm Interested in writing technology articles",
+		"role": "user",
+		"active": true,
+		"photo": "user-3.jpg",
+		"password": "$2a$12$9nFqToiTmjgfFVJiQvjmreLt4k8X4gGYCETGapSZOb2hHa55t0dDq"
+	},
+	{
+		"_id":"61ed7e4a3c05a74b3559bb4d",
+		"name": "Technobot Robot",
+		"email": "technobot@example.com",
+		"about":"Greetings everyone thanks for reading my articles more like these are comming soon",
+		"role": "user",
+		"active": true,
+		"photo": "user-4.jpg",
+		"password": "$2a$12$tm33.M/4pfEbZF64WbFuHuVFv85v4qEhi.ik8njbud7yaoqCZpjiy"
+	},
+	{
+		"_id":"61ed7e4a3c05a74b3559bb4e",
+		"name": "Leo Gillespie",
+		"email": "leo@example.com",
+		"about":"Hello everyone Hope you all doing well, I Write General Science articles, Hope you like my other articles too",
+		"role": "user",
+		"active": true,
+		"photo": "user-5.jpg",
+		"password": "$2a$12$OOPr90tBEBF1Iho3ox0Jde0O/WXUR0VLA5xdh6tWcu7qb.qOCvSg2"
+	}
+]

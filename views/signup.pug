@@ -1,0 +1,23 @@
+extends base
+
+block content 
+
+    section.signup
+        form.user-form.signup--form 
+            h2 Signup
+            .form-group.login-group
+                label.form-label.form-small(for="name") Name
+                input#name.form-input(type="name", placeholder="User Name", name="name", required)
+            .form-group.login-group
+                label.form-label.form-small(for="email") E-mail
+                input#email.form-input(type="email", placeholder="enter your email", name="email", required)
+            .form-group.login-group
+                label.form-label.form-small(for="password") Password
+                input#password.form-input(type="password", placeholder="••••••••••", name="password", required)
+            .form-group.login-group
+                label.form-label.form-small(for="password") Confirm Password
+                input#confirmPassword.form-input(type="password", placeholder="••••••••••", name="confirmPassword", required)
+            button.btn Join now
+            p.user-log-alter
+                | already have account?
+                a(href="/login") login
