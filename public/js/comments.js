@@ -14,7 +14,7 @@ export const postComment = async (comment, id) => {
     if (res.data.status === "success") {
       showAlert("success", "posted successfully");
       window.setTimeout(() => {
-        window.location = document.referrer;
+        location.reload(true);
       }, 1500);
     }
   } catch (error) {
