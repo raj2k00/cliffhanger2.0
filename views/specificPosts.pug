@@ -2,7 +2,10 @@ extends base
 
 block content
      .my-article-content
-            h2= `Articles with ${category} ${value}`
+            if (!isNaN(parseInt(value)))
+                h2= `More from that Author`
+            else 
+                h2= `Articles with ${category} ${value}`
             .my-articles
                 each post in posts.results
                     .blog-item

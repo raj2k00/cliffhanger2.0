@@ -121,24 +121,6 @@ articleSchema.pre("save", function (next) {
   next();
 });
 
-// This code will embedd the users as guides in tour document if we specify id in the array
-// tourSchema.pre("save", async function (next) {
-//   const guidePromises = this.guides.map(
-//     async (id) => await User.findById(id)
-//   );
-//   this.guides = await Promise.all(guidePromises);
-//   next();
-// });
-
-//QUERY MIDDLEWARE regular expression is used to use all find methods
-// this -keyword represents current query
-// tourSchema.pre(/^find/, function (next) {
-//   this.options.runValidators = true;
-//   this.start = Date.now();
-//   this.find({ secretTour: { $ne: true } });
-//   next();
-// });
-
 articleSchema.pre(/^find/, function (next) {
   this.populate({
     path: "author",

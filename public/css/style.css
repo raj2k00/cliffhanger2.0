@@ -1293,13 +1293,22 @@ a:visited {
   justify-content: flex-start;
   padding: 1rem;
 }
-
+.post-comment-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
 .comment-end-seperator {
   border: 1px solid #e0e0e0;
   width: 100%;
   display: inline-block;
   margin: 2rem 0;
 }
+
 /* ///////// PROFIlE SETTINGS ///////// */
 .profile {
   padding: 15rem 0rem 5rem;
@@ -1732,6 +1741,10 @@ ul {
 }
 .btn-delete:focus-visible {
   outline: none;
+}
+/* //for comment section */
+.mg-lauto {
+  margin-left: auto;
 }
 
 /* ////////////   footer logo //////////// */

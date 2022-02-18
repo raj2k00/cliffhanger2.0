@@ -7,6 +7,7 @@ import { deletePost } from "./deletePost";
 import { forgetPassword } from "./forgetPassword";
 import { resetPassword } from "./resetPassword";
 import { sendPost } from "./userArticle";
+import { postComment, deleteComment } from "./comments";
 
 //DOM VALUES
 //FOR ELEMENTS/ANIMATIONS
@@ -26,7 +27,11 @@ const resetBtn = document.querySelector(".user-resetPassword");
 const updateUser = document.querySelector(".updateProfile");
 const updatePassword = document.querySelector(".updatePassword");
 const composeArticle = document.querySelector(".formComposePost");
-const deleteArticle = document.querySelector(".tooltip-delete");
+const deleteArticle = document.querySelector(".btn-deletePost");
+const uploadComment = document.querySelector(".post-comment-form");
+const deleteCommentBtn = Array.from(
+  document.querySelectorAll(".btn-deleteComment")
+);
 
 //DELEGATION
 
@@ -244,6 +249,23 @@ if (uploadBtn) {
     sendBtn.classList.remove("btn-disabled");
     sendBtn.textContent = "Send Again!";
     sendBtn.disabled = false;
+  });
+}
+
+if (uploadComment) {
+  uploadComment.addEventListener("submit", async (e) => {
+    const comment = document.getElementById("comment").value;
+    const id = document.querySelector(".post-Id").textContent;
+    await postComment(comment, id);
+  });
+}
+
+if (deleteCommentBtn) {
+  deleteCommentBtn.forEach((btn) => {
+    const commentId = btn.previousSibling.textContent;
+    btn.addEventListener("click", (e) => {
+      deleteComment(commentId);
+    });
   });
 }
 

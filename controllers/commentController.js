@@ -1,14 +1,14 @@
 const Comment = require("../models/commentModel");
 const factory = require("./factoryHandler");
 
-exports.setTourUserIds = (req, res, next) => {
+exports.setArticleUserIds = (req, res, next) => {
   if (!req.body.article) req.body.article = req.params.articleId;
   if (!req.body.user) req.body.user = req.user.id;
   next();
 };
 
-exports.getAllReviews = factory.getAllDoc(Comment);
-exports.getOneReview = factory.getOne(Comment);
-exports.createReview = factory.createOne(Comment);
-exports.updateReview = factory.updateOne(Comment);
-exports.deleteReview = factory.deleteOne(Comment);
+exports.getAllComments = factory.getAllDoc(Comment);
+exports.getOneComment = factory.getOne(Comment);
+exports.createComment = factory.createOne(Comment);
+exports.updateComment = factory.updateOne(Comment);
+exports.deleteComment = factory.deleteOne(Comment);

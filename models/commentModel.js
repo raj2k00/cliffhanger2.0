@@ -38,7 +38,7 @@ commentSchema.pre(/^find/, function (next) {
   this.populate({
     path: "user",
     select: ["name", "photo"],
-  });
+  }).sort({ createdAt: -1 });
   next();
 });
 

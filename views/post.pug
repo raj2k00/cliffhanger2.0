@@ -18,7 +18,7 @@ block content
                     -if(user.role === 'admin')
                         a.tooltip-edit(href=`/edit/${post.id}`, data-tooltip="edit")
                             i.fa.fa-edit.article-icon.icon-edit                                
-                        button.btn-delete.tooltip-delete(data-tooltip="delete")
+                        button.btn-deletePost.btn-delete.tooltip-delete(data-tooltip="delete")
                             i.fa.fa-trash.article-icon.icon-delete
             img(src=`/img/cover/${post.imageCover}`, alt="Post-image")
             | !{post.sanitizedHtml}
@@ -39,10 +39,16 @@ block content
     section.comments
         h3= `${post.comments.length} comments`
         .post-comments
-            img.nav-user-image(src=`/img/user/${post.author.photo}`, alt=`${name}` )
-            .post-comment-write
-                textarea#comment(name="new-comment", rows="3", placeholder="write your comment here")
-                button Post comment
+            if user
+                img.nav-user-image(src=`/img/user/${user.photo}`, alt=`${name}` )
+                .post-comment-write
+                    form.post-comment-form 
+                        p.post-Id= post.id
+                        textarea#comment(name="new-comment", rows="3", placeholder="write your comment here")
+                        button.post-btn Post comment
+            else 
+                a(href="/login")
+                    button.btn Login to comment
         .display-comments
             if post.comments
                 each comment in post.comments
@@ -52,6 +58,15 @@ block content
                             h2= comment.user.name
                             h4= `posted at ${comment.createdAt.toLocaleString('en-us',{day:"numeric",month:"short",year:"numeric"})}`
                             h3= comment.comment
+                        -if(user.role == "admin")
+                            p.post-Id.comment-Id= comment.id
+                            button.btn-deleteComment.btn-delete.tooltip-delete.mg-lauto(data-tooltip="delete")
+                                i.fa.fa-trash.article-icon.icon-delete
+                        -if(user.role != "admin")
+                            -if (comment.user.id == user.id)
+                                p.post-Id.comment-Id= comment.id
+                                button.btn-deleteComment.btn-delete.tooltip-delete.mg-lauto(data-tooltip="delete")
+                                    i.fa.fa-trash.article-icon.icon-delete
                     hr.comment-end-seperator
         
         //- 3. MORE LIKE THESE
@@ -60,5 +75,6 @@ block content
             #content.post-articles
                 each morePost in morePosts
                     .post-articles-container
-                        img(src=`/img/cover/${morePost.imageCover}`, alt="title")
-                        h1= morePost.title
+                        a(href=`./${morePost.slug}`)
+                            img(src=`/img/cover/${morePost.imageCover}`, alt="title")
+                            h1= morePost.title

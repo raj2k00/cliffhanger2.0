@@ -8,25 +8,29 @@ const {
 } = require("../controllers/authController");
 
 const {
-  getAllReviews,
-  createReview,
-  deleteReview,
-  updateReview,
-  setTourUserIds,
-  getOneReview,
+  getAllComments,
+  createComment,
+  deleteComment,
+  updateComment,
+  setArticleUserIds,
+  getOneComment,
 } = require("../controllers/commentController");
 
 router.use(protect);
 
 router
   .route("/")
-  .get(getAllReviews)
-  .post(restrictTo("user", "admin"), setTourUserIds, createReview);
+  .get(getAllComments)
+  .post(
+    restrictTo("user", "admin"),
+    setArticleUserIds,
+    createComment
+  );
 
 router
   .route("/:id")
-  .get(getOneReview)
-  .patch(restrictTo("user", "admin"), updateReview)
-  .delete(restrictTo("user", "admin"), deleteReview);
+  .get(getOneComment)
+  .patch(restrictTo("user", "admin"), updateComment)
+  .delete(restrictTo("user", "admin"), deleteComment);
 
 module.exports = router;
