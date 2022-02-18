@@ -6,8 +6,8 @@ export const postArticle = async (data, type, id) => {
   try {
     const url =
       type === "Update"
-        ? `http://127.0.0.1:3000/api/v1/articles/${id}`
-        : "http://127.0.0.1:3000/api/v1/articles/";
+        ? `/api/v1/articles/${id}`
+        : "/api/v1/articles/";
 
     const method = type === "Update" ? "PATCH" : "POST";
     const res = await axios({

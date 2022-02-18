@@ -6,7 +6,7 @@ export const sendPost = async (data) => {
   try {
     const res = await axios({
       method: "POST",
-      url: `http://127.0.0.1:3000/userArticle`,
+      url: `/userArticle`,
       data,
     });
     if (res.data.status === "success") {

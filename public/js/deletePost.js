@@ -5,7 +5,7 @@ export const deletePost = async (id) => {
   try {
     const res = await axios({
       method: "DELETE",
-      url: `http://127.0.0.1:3000/api/v1/articles/${id}`,
+      url: `/api/v1/articles/${id}`,
     });
     if (res.status === 204) {
       showAlert("success", "Article Deleted Successfully");

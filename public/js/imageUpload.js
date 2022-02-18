@@ -1,3 +1,4 @@
+/*eslint-disable */
 jQuery(document).ready(function () {
   ImgUpload();
 });
@@ -8,7 +9,9 @@ function ImgUpload() {
 
   $(".upload__inputfile").each(function () {
     $(this).on("change", function (e) {
-      imgWrap = $(this).closest(".upload__box").find(".upload__img-wrap");
+      imgWrap = $(this)
+        .closest(".upload__box")
+        .find(".upload__img-wrap");
       var maxLength = $(this).attr("data-max_length");
 
       var files = e.target.files;
