@@ -1,7 +1,7 @@
 const path = require("path");
 const express = require("express");
 const morgan = require("morgan");
-// const helmet = require("helmet");
+const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 const hpp = require("hpp");
@@ -42,17 +42,18 @@ app.use(cors());
 app.options("*", cors());
 
 //Adding security headers
-// app.use(
-//   helmet({
-//     contentSecurityPolicy: {
-//       directives: {
-//         ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-//         "img-src": "*",
-//       },
-//     },
-//     crossOriginEmbedderPolicy: false,
-//   })
-// );
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+    // contentSecurityPolicy: {
+    //   directives: {
+    //     ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+    //     "img-src": "*",
+    //   },
+    // },
+    crossOriginEmbedderPolicy: false,
+  })
+);
 
 // Limiting the request from the same IP to prevent DOS attacks
 const limiter = rateLimit({

@@ -6,7 +6,7 @@ const handleCastErrorDB = (err) => {
 };
 
 const handleDublicateFieldsDB = (err) => {
-  const message = `Tour with name - ${err.keyValue.name} - already exists`;
+  const message = `Article with name - ${err.keyValue.name} - already exists`;
   return new AppError(message, 400);
 };
 const handleValidatonFieldDB = (err) => {
@@ -92,7 +92,7 @@ module.exports = (err, req, res, next) => {
     error.message = err.message;
     if (error.path === "_id") error = handleCastErrorDB(error);
     if (error.code === 11000) error = handleDublicateFieldsDB(error);
-    if (error._message === "Tour validation failed")
+    if (error._message === "Article validation failed")
       error = handleValidatonFieldDB(error);
     if (error.name === "JsonWebTokenError")
       error = handleInvalidSignature(error);
