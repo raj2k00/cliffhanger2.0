@@ -70,6 +70,7 @@ const sendProductionError = (err, req, res) => {
       title: "Not Found",
       msg: err.message,
       status: err.statusCode,
+      err: err,
     });
     // Programming error or third party library error not sending details
   }
