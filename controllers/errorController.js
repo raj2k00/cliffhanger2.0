@@ -64,24 +64,21 @@ const sendProductionError = (err, req, res) => {
     });
   }
   // RENDER WEBSITE
-  console.error("ERROR 💥", err);
   if (err.isOperational) {
     return res.status(err.statusCode).render("error", {
       title: "Not Found",
       msg: err.message,
       status: err.statusCode,
-      err: Object.keys(err),
     });
     // Programming error or third party library error not sending details
   }
   // Logging the error
   console.error("ERROR 💥", err);
   //Sending Genering Message
-  console.log("errrorffkjjlksa", err);
   return res.status(err.statusCode).render("error", {
     title: "Not Found",
-    msg: "Please try again later!",
-    err: Object.keys(err),
+    msg: "Please try again later",
+    err: "Try Login!",
   });
 };
 
