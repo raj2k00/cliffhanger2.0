@@ -75,10 +75,11 @@ const sendProductionError = (err, req, res) => {
   // Logging the error
   console.error("ERROR 💥", err);
   //Sending Genering Message
+  console.log("errrorffkjjlksa", err);
   return res.status(err.statusCode).render("error", {
     title: "Not Found",
     msg: "Please try again later!",
-    err: err,
+    err: err.message,
   });
 };
 
