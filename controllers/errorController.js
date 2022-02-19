@@ -70,7 +70,7 @@ const sendProductionError = (err, req, res) => {
       title: "Not Found",
       msg: err.message,
       status: err.statusCode,
-      err: err,
+      err: Object.keys(err),
     });
     // Programming error or third party library error not sending details
   }
@@ -81,7 +81,7 @@ const sendProductionError = (err, req, res) => {
   return res.status(err.statusCode).render("error", {
     title: "Not Found",
     msg: "Please try again later!",
-    err: err.message,
+    err: Object.keys(err),
   });
 };
 
