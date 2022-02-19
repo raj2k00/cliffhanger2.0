@@ -64,6 +64,7 @@ const sendProductionError = (err, req, res) => {
     });
   }
   // RENDER WEBSITE
+  console.error("ERROR 💥", err);
   if (err.isOperational) {
     return res.status(err.statusCode).render("error", {
       title: "Not Found",
