@@ -77,7 +77,8 @@ const sendProductionError = (err, req, res) => {
   //Sending Genering Message
   return res.status(err.statusCode).render("error", {
     title: "Not Found",
-    msg: "Please try again later",
+    msg: "Please try again later!",
+    err: err,
   });
 };
 
