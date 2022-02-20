@@ -58,15 +58,16 @@ block content
                             h2= comment.user.name
                             h4= `posted at ${comment.createdAt.toLocaleString('en-us',{day:"numeric",month:"short",year:"numeric"})}`
                             h3= comment.comment
-                        -if(user.role == "admin")
-                            p.post-Id.comment-Id= comment.id
-                            button.btn-deleteComment.btn-delete.tooltip-delete.mg-lauto(data-tooltip="delete")
-                                i.fa.fa-trash.article-icon.icon-delete
-                        -if(user.role != "admin")
-                            -if (comment.user.id == user.id)
+                        if user
+                            -if(user.role == "admin")
                                 p.post-Id.comment-Id= comment.id
                                 button.btn-deleteComment.btn-delete.tooltip-delete.mg-lauto(data-tooltip="delete")
                                     i.fa.fa-trash.article-icon.icon-delete
+                            -if(user.role != "admin")
+                                -if (comment.user.id == user.id)
+                                    p.post-Id.comment-Id= comment.id
+                                    button.btn-deleteComment.btn-delete.tooltip-delete.mg-lauto(data-tooltip="delete")
+                                        i.fa.fa-trash.article-icon.icon-delete
                     hr.comment-end-seperator
         
         //- 3. MORE LIKE THESE

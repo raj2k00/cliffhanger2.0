@@ -78,7 +78,6 @@ const sendProductionError = (err, req, res) => {
   return res.status(err.statusCode).render("error", {
     title: "Not Found",
     msg: "Please try again later",
-    err: "Try Login!",
   });
 };
 
