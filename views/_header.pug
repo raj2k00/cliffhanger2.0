@@ -1,13 +1,13 @@
 // NAVIGATION BAR
 nav#nav-bar.nav-container
     a.nav-logo-container(href="/")
-        img.nav-logo(src="/img/favicon.png", alt="img")
+        img.nav-logo(src="/img/Logo.png", alt="img")
     a.Sandwitch-Icon(href="javascript:void(0);")
         i#toggle-icon.fa.fa-bars
     #nav-menus.nav-right.nav-links
         .nav-category
             a.nav-link--items(href=`/search/?category=technology`) Tech
-            a.nav-link--items(href=`/search/?category=science`) Science
+            a.nav-link--items(href=`/search/?category=events`) Events
             a.nav-link--items(href=`/search/?category=gaming`) Gaming
             if user
                 a.nav-link--items(href="/write") Write for us

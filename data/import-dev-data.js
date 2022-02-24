@@ -2,7 +2,7 @@ const fs = require("fs");
 const mongoose = require("mongoose");
 require("dotenv").config();
 const Article = require("../models/articleModel");
-const User = require("../models/userModel");
+// const User = require("../models/userModel");
 const Comment = require("../models/commentModel");
 
 const DB = process.env.DATABASE.replace(
@@ -20,9 +20,9 @@ mongoose
 const article = JSON.parse(
   fs.readFileSync(`${__dirname}/articles.json`, "utf-8")
 );
-const users = JSON.parse(
-  fs.readFileSync(`${__dirname}/users.json`, "utf-8")
-);
+// const users = JSON.parse(
+//   fs.readFileSync(`${__dirname}/users.json`, "utf-8")
+// );
 const comment = JSON.parse(
   fs.readFileSync(`${__dirname}/comments.json`, "utf-8")
 );
@@ -31,7 +31,7 @@ const comment = JSON.parse(
 const importData = async () => {
   try {
     await Article.create(article);
-    await User.create(users, { validateBeforeSave: false });
+    // await User.create(users, { validateBeforeSave: false });
     await Comment.create(comment);
     console.log("Data successfully loaded!");
   } catch (err) {
@@ -44,7 +44,7 @@ const importData = async () => {
 const deleteData = async () => {
   try {
     await Article.deleteMany();
-    await User.deleteMany();
+    // await User.deleteMany();
     await Comment.deleteMany();
     console.log("Data successfully deleted!");
   } catch (err) {
