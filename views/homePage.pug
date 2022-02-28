@@ -9,7 +9,10 @@ block content
             ul.carousel-ul-list(data-slides)
                 each feature in features 
                     li.slide
-                        img(src=`/img/cover/${feature.imageCover}`, alt=`${feature.imageCover}`)
+                        if (feature.imageCover.startsWith("http://res.cloudinary"))
+                            img(src=`${feature.imageCover}`, alt=`${feature.imageCover}`)
+                        else
+                            img(src=`/img/cover/${feature.imageCover}`, alt=`${feature.imageCover}`)
                         h1.carousel-text
                             a.article-tag.red-background(href=`/search/?category=${feature.category}`)= feature.category
                             a.carousel-links(href=`/posts/${feature.slug}`)= feature.title
@@ -24,7 +27,10 @@ block content
                     .blog-container
                         .blog-image
                             a(href=`./posts/${post.slug}`)
-                                img.blog-image--content(src=`/img/cover/${post.imageCover}`, alt="image")
+                                if (post.imageCover.startsWith("http://res.cloudinary"))
+                                    img.blog-image--content(src=`${post.imageCover}`, alt=`${post.imageCover}`)
+                                else
+                                    img.blog-image--content(src=`/img/cover/${post.imageCover}`, alt=`${post.imageCover}`)
                         .blog-content
                             a.article-tag.small-text(href=`/search/?category=${post.category}`)= post.category
                             h1.blog-heading
@@ -53,7 +59,10 @@ block content
                 .side-container
                     a.side-container-set(href=`./posts/${trend.slug}`)
                         .side-image
-                            img(src=`/img/cover/${trend.imageCover}`, alt="image")
+                            if (trend.imageCover.startsWith("http://res.cloudinary"))
+                                img(src=`${trend.imageCover}`, alt=`${trend.imageCover}`)
+                            else
+                                img(src=`/img/cover/${trend.imageCover}`, alt=`${trend.imageCover}`)
                         .side-content-text
                             h1.side-heading= trend.title
 

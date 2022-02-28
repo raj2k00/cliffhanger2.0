@@ -16,7 +16,10 @@ nav#nav-bar.nav-container
             .nav-user
                 a.nav-link--items.nav-link--logout(href="#") Log Out
                 a.nav-link--items.logged-user(href="/profile")
-                    img.nav-user-image(src=`/img/user/${user.photo}`, alt="userImage")
+                    if (user.photo.startsWith("http://res.cloudinary"))
+                        img.nav-user-image(src=`${user.photo}`, alt="userImage")
+                    else
+                        img.nav-user-image(src=`/img/user/${user.photo}`, alt="userImage")
                     span.nav-user-name= user.name.split(' ')[0]
 
         else

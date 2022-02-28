@@ -20,7 +20,10 @@ block content
                             i.fa.fa-edit.article-icon.icon-edit                                
                         button.btn-deletePost.btn-delete.tooltip-delete(data-tooltip="delete")
                             i.fa.fa-trash.article-icon.icon-delete
-            img(src=`/img/cover/${post.imageCover}`, alt="Post-image")
+            if (post.imageCover.startsWith("http://res.cloudinary"))
+                img(src=`${post.imageCover}`, alt=`${post.imageCover}`)
+            else
+                img(src=`/img/cover/${post.imageCover}`, alt="Post-image")
             | !{post.sanitizedHtml}
             hr.blog-end-seperator
     
@@ -40,7 +43,10 @@ block content
         h3= `${post.comments.length} comments`
         .post-comments
             if user
-                img.nav-user-image(src=`/img/user/${user.photo}`, alt=`${name}` )
+                if (user.photo.startsWith("http://res.cloudinary"))
+                    img.nav-user-image(src=`${user.photo}`, alt=`${name}`)
+                else
+                    img.nav-user-image(src=`/img/user/${user.photo}`, alt=`${name}` )
                 .post-comment-write
                     form.post-comment-form 
                         p.post-Id= post.id
@@ -77,5 +83,8 @@ block content
                 each morePost in morePosts
                     .post-articles-container
                         a(href=`./${morePost.slug}`)
-                            img(src=`/img/cover/${morePost.imageCover}`, alt="title")
+                            if (morePost.imageCover.startsWith("http://res.cloudinary"))
+                                img(src=`${morePost.imageCover}`, alt=`${morePost.imageCover}`)
+                            else
+                                img(src=`/img/cover/${morePost.imageCover}`, alt="Post-image")
                             h1= morePost.title

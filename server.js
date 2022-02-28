@@ -1,5 +1,6 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
+const cloudinary = require("cloudinary").v2;
 
 process.on("uncaughtException", (err) => {
   console.log("uncaught Exception 💥💥 Server shutting down");
@@ -19,6 +20,13 @@ mongoose
     useNewUrlParser: true,
   })
   .then(() => console.log("Connected to Cloud Database"));
+
+//Cloudinary Config
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
+});
 
 const port = process.env.PORT || 3000;
 

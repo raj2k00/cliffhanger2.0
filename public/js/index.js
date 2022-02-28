@@ -94,12 +94,17 @@ if (resetBtn) {
   });
 }
 if (updateUser) {
-  updateUser.addEventListener("submit", (e) => {
+  updateUser.addEventListener("submit", async (e) => {
     e.preventDefault();
+    const btn = document.querySelector(".btn-save--profile");
+    btn.textContent = "Updating...";
+    btn.classList.add("btn-disabled");
     const form = new FormData();
     form.append("name", document.getElementById("name").value);
     form.append("photo", document.getElementById("image").files[0]);
-    updateProfile(form, "data");
+    await updateProfile(form, "data");
+    btn.textContent = "Change Again";
+    btn.classList.remove("btn-disabled");
   });
 }
 
@@ -117,8 +122,7 @@ if (updatePassword) {
       { password, newPassword, passwordConfirm },
       "password"
     );
-    document.querySelector(".btn-save--password").textContent =
-      "Change Again";
+    btn.textContent = "Change Again";
     btn.classList.remove("btn-disabled");
     document.getElementById("password").value = "";
     document.getElementById("newPassword").value = "";

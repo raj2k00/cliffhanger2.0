@@ -29,8 +29,12 @@ block content
                 input#subheading.form-input(type="text", placeholder="Describe a little about your content (max-100 character)", value=`${post.abstract}` ,name="subheading", maxlength="100", required)
             -if(post.imageCover)
                 p(class="prevFormValues") Previous Image
-                a(href=`/img/cover/${post.imageCover}` download) 
-                    img(class="previousFormImage" ,src=`/img/cover/${post.imageCover}`, alt="previous image")
+                if (post.imageCover.startsWith("http://res.cloudinary"))
+                    a(href=`${post.imageCover}` download) 
+                        img(class="previousFormImage" ,src=`${post.imageCover}`, alt="previous image")
+                else   
+                    a(href=`/img/cover/${post.imageCover}` download) 
+                        img(class="previousFormImage" ,src=`/img/cover/${post.imageCover}`, alt="previous image")
             div(class="upload__box form-group")
                 div(class="upload__btn-box")
                     label(class="upload__btn", for="image")
