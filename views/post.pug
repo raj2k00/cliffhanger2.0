@@ -44,9 +44,9 @@ block content
         .post-comments
             if user
                 if (user.photo.startsWith("http://res.cloudinary"))
-                    img.nav-user-image(src=`${user.photo}`, alt=`${name}`)
+                    img.nav-user-image(src=`${user.photo}`, alt=`user-image`)
                 else
-                    img.nav-user-image(src=`/img/user/${user.photo}`, alt=`${name}` )
+                    img.nav-user-image(src=`/img/user/${user.photo}`, alt=`user-image` )
                 .post-comment-write
                     form.post-comment-form 
                         p.post-Id= post.id
@@ -59,7 +59,10 @@ block content
             if post.comments
                 each comment in post.comments
                     .display-comments-container
-                        img.nav-user-image(src=`/img/user/${comment.user.photo}`, alt='user-image')
+                        if (comment.user.photo.startsWith("http://res.cloudinary"))
+                            img.nav-user-image(src=`${comment.user.photo}`, alt=`user-image`)
+                        else
+                            img.nav-user-image(src=`/img/user/${comment.user.photo}`, alt=`user-image` )
                         .display-comment-details
                             h2= comment.user.name
                             h4= `posted at ${comment.createdAt.toLocaleString('en-us',{day:"numeric",month:"short",year:"numeric"})}`
