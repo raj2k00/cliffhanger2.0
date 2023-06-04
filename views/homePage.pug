@@ -1,0 +1,68 @@
+extends base
+
+block content
+
+    section.carousel-container(aria-label="Newest Photos")
+        .carousel(data-carousel)
+            button.carousel-button.prev(data-carousel-button="prev") &#8656;
+            button.carousel-button.next(data-carousel-button="next") &#8658;
+            ul.carousel-ul-list(data-slides)
+                each feature in features 
+                    li.slide
+                        if (feature.imageCover.startsWith("http://res.cloudinary"))
+                            img(src=`${feature.imageCover}`, alt=`${feature.imageCover}`)
+                        else
+                            img(src=`/img/cover/${feature.imageCover}`, alt=`${feature.imageCover}`)
+                        h1.carousel-text
+                            a.article-tag.red-background(href=`/search/?category=${feature.category}`)= feature.category
+                            a.carousel-links(href=`/posts/${feature.slug}`)= feature.title
+
+    .Blog-Main-content
+        .main-content
+            .hr-style
+                h1 Latest
+                hr.hr-headline
+            each post in posts.results
+                .blog-item
+                    .blog-container
+                        .blog-image
+                            a(href=`./posts/${post.slug}`)
+                                if (post.imageCover.startsWith("http://res.cloudinary"))
+                                    img.blog-image--content(src=`${post.imageCover}`, alt=`${post.imageCover}`)
+                                else
+                                    img.blog-image--content(src=`/img/cover/${post.imageCover}`, alt=`${post.imageCover}`)
+                        .blog-content
+                            a.article-tag.small-text(href=`/search/?category=${post.category}`)= post.category
+                            h1.blog-heading
+                                a(href=`./posts/${post.slug}`)= post.title
+                            p.blog-subheading= post.abstract
+                            p.blog-created-at= `by ${post.author.name.split(' ')[0]}  ` 
+                                span.time-stamp= post.createdAt.toLocaleString('en-us',{day:"numeric",month:"short",year:"numeric"})                              
+                                if user
+                                    -if(user.role === 'admin')
+                                        a.tooltip-edit(href=`/edit/${post.id}`, data-tooltip="edit")
+                                            i.fa.fa-edit.article-icon.icon-edit   
+                    hr.blog-seperator
+            .page-button 
+                if posts.previous 
+                    a(href=`/?page=${posts.previous.page}`) 
+                        button#prev(class="btn btn_prev") Prev Page
+                if posts.next
+                    a(href=`/?page=${posts.next.page}`) 
+                        button#next(class="btn btn_next") Next Page
+
+        .side-content
+            .hr-side-style
+                h1 Trending
+                hr.hr-headline
+            each trend in trends
+                .side-container
+                    a.side-container-set(href=`./posts/${trend.slug}`)
+                        .side-image
+                            if (trend.imageCover.startsWith("http://res.cloudinary"))
+                                img(src=`${trend.imageCover}`, alt=`${trend.imageCover}`)
+                            else
+                                img(src=`/img/cover/${trend.imageCover}`, alt=`${trend.imageCover}`)
+                        .side-content-text
+                            h1.side-heading= trend.title
+

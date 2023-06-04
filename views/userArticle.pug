@@ -1,0 +1,42 @@
+extends base
+
+block content
+    section.userArticle-heading
+        .heading-container
+            h1.heading-featured Featured
+            h1.heading-big Let's Write!
+            p.heading-sub
+                | we are here for you,send your article once accepted it will be
+                | published online with your name
+            p(class="post-Id")= user.id
+    form.form-container.form-userArticle
+        .form-UserName
+            .form-group
+                label.form-label(for="fname") First Name
+                input#fname.form-input.fixed-value(type="text", placeholder="Your First Name", name="fname", required,value=`${user.name.split(" ")[0] }`,readonly)
+            - if(user.name.split(" ")[1])
+                .form-group.pad-left
+                    label.form-label(for="lname") Last Name
+                    input#lname.form-input.fixed-value(type="text", placeholder="Your Last Name", name="lname",value=`${user.name.split(" ")[1] }`,readonly)
+        .form-group.form-email
+            label.form-label(for="email") Email
+            input#email.form-input.fixed-value(type="email", placeholder="Your Email", name="email", value=`${user.email}`,required,readonly)
+        .form-group.form-topic
+            label.form-label(for="topic") Topic
+            input#topic.form-input(type="text", placeholder="Enter Topic/Catagory", name="topic", required)
+        .form-group.form-headline
+            label.form-label(for="headline") Headline
+            input#heading.form-input(type="text", placeholder="Give a Cachy Headline", name="headline", required)
+        div(class="upload__box form-group")
+            div(class="upload__btn-box")
+                label(class="upload__btn")
+                    p Upload images
+                    input#image(type="file", multiple, name="image", maxlength="20", data-max_length="20", class="upload__inputfile")
+            div(class="upload__img-wrap")
+        .form-group.form-marked
+            h1 Write your Article
+            textarea#mark-down.form-marked-text(name="markdown", rows="15", required, placeholder="Use '#' before the start of heading ,   Use '![](url)'' to mention images/urls  ")
+        .form-submit-container
+            button#js_send.btn.btn--small
+                i#form-submit-text.fa.fa-upload.form-submit-text
+                | Send!

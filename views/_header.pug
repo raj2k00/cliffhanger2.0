@@ -1,0 +1,30 @@
+// NAVIGATION BAR
+nav#nav-bar.nav-container
+    a.nav-logo-container(href="/")
+        img.nav-logo(src="/img/Logo.png", alt="img")
+    a.Sandwitch-Icon(href="javascript:void(0);")
+        i#toggle-icon.fa.fa-bars
+    #nav-menus.nav-right.nav-links
+        .nav-category
+            a.nav-link--items(href=`/search/?category=technology`) Tech
+            a.nav-link--items(href=`/search/?category=events`) Events
+            a.nav-link--items(href=`/search/?category=gaming`) Gaming
+            if user
+                a.nav-link--items(href="/write") Write for us
+        
+        if user
+            .nav-user
+                a.nav-link--items.nav-link--logout(href="#") Log Out
+                a.nav-link--items.logged-user(href="/profile")
+                    if (user.photo.startsWith("http://res.cloudinary"))
+                        img.nav-user-image(src=`${user.photo}`, alt="userImage")
+                    else
+                        img.nav-user-image(src=`/img/user/${user.photo}`, alt="userImage")
+                    span.nav-user-name= user.name.split(' ')[0]
+
+        else
+            .nav-user
+                a.nav-link--items(href="/login") Login
+                a.nav-link--items(href="/signup") Signup
+        
+

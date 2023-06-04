@@ -1,0 +1,19 @@
+extends base
+
+block content
+
+        section.login
+            form.user-form.login-form
+                h2 Login
+                .form-group.login-group
+                    label.form-label.form-small(for="email") email
+                    input#email.form-input(type="email", placeholder="enter your email", name="email", required)
+                .form-group.login-group
+                    label.form-label.form-small(for="password") Password
+                    input#password.form-input(type="password", placeholder="••••••••••", name="password", required)
+                p.user-log-alter.forgetPassword-btn
+                    a(href="/forgetPassword") forgetPassword?
+                button.btn Login in
+                p.user-log-alter
+                    | Don't have account? 
+                    a(href="/signup") Signup

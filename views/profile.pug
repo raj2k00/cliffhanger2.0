@@ -1,0 +1,55 @@
+extends base
+
+mixin navItem(link,icon,text)
+    li.nav--items
+        a(href=`${link}`)
+            i.fa.icon-space(class=`fa-${icon}`)
+            | #{text}
+
+block content 
+
+    section.profile
+        .profile-content
+            .profile-content-left
+                .user-nav
+                    ul.user-nav-contents
+                        +navItem('/profile','cog','Settings')
+                        +navItem('#','book','My Posts')
+                -if(user.role === "admin")
+                    .admin-nav
+                        ul.admin-nav-contents
+                            h3 admin controls
+                            hr.profile-seperator
+                            +navItem('/compose','envelope','New Post')
+                            +navItem('#','clipboard','Manage Posts')
+                            +navItem('#','users','Manage users')
+                            +navItem('#','comments','Manage comments')
+
+            .profile-content-right
+                .user-settings
+                    form.user-form.updateProfile
+                        h2 Your Account Settings
+                        .form-group.mg-top
+                            label.form-label.form-small(for="name") Name
+                            input#name.form-input.wd-60(type="text", value=`${user.name}`, name="name",required)
+                        div(class="upload__box form-group user-photo")
+                            div(class="upload__btn-box user-photo-container")
+                                h3.photo-label Profile Photo
+                                label(class="upload__btn", for="image")
+                                    p Change
+                                    input#image(type="file", data-max_length="1", class="upload__inputfile", accept="image/*", name="photo")
+                            div(class="upload__img-wrap user-photo-image")
+                        button.btn.btn--small.btn-save--profile Change Settings
+                    hr.blog-end-seperator
+                    form.user-form.updatePassword
+                        h2 Change Password
+                        .form-group.pass-flex.mg-top
+                            label.form-label(for="password") Current Password
+                            input#password.form-input(type="password", placeholder="••••••••", required)
+                        .form-group.pass-flex
+                            label.form-label(for="password") New Password
+                            input#newPassword.form-input(type="password", placeholder="••••••••",required)
+                        .form-group.pass-flex
+                            label.form-label(for="password") Confirm Password
+                            input#confirmPassword.form-input(type="password", placeholder="••••••••",  required)
+                        button.btn.btn--small.btn-save--password Save Password

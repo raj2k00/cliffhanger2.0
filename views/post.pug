@@ -1,0 +1,93 @@
+extends base
+
+block content
+    //- POST MAIN-CONTENT
+    section.post
+        .post-container
+            a.article-tag.red-background(href=`/search/?category=${post.category}`)= post.category
+            h1= post.title
+            h2.post-subtitle= post.abstract 
+            - name =  post.author.name.split(' ')[0]
+            h4.post-tags tags:
+                each tag in post.tags
+                    a.article-tag.red-background(href=`/search/?tags=${tag}`)= tag
+            p.post-Id= post.id
+            p.blog-created-at= `posted by ${name} at `
+                span.time-stamp= post.createdAt.toLocaleString('en-us',{day:"numeric", month:"short",year:"numeric"})
+                if user
+                    -if(user.role === 'admin')
+                        a.tooltip-edit(href=`/edit/${post.id}`, data-tooltip="edit")
+                            i.fa.fa-edit.article-icon.icon-edit                                
+                        button.btn-deletePost.btn-delete.tooltip-delete(data-tooltip="delete")
+                            i.fa.fa-trash.article-icon.icon-delete
+            if (post.imageCover.startsWith("http://res.cloudinary"))
+                img(src=`${post.imageCover}`, alt=`${post.imageCover}`)
+            else
+                img(src=`/img/cover/${post.imageCover}`, alt="Post-image")
+            | !{post.sanitizedHtml}
+            hr.blog-end-seperator
+    
+    //- 1. AUTHOR ABOUT SECTION
+    .post-author
+        h2 About the Author
+        h2.post-author--name= name 
+        p= post.author.about
+        //- // FIXMe: the bottom link should be a button that query more articles form same author
+        a(href=`/search/?author=${post.author.id}`)
+            h3= `More from ${name} `
+        
+        hr.blog-end-seperator
+    
+    //- 2. COMMENT SECTION
+    section.comments
+        h3= `${post.comments.length} comments`
+        .post-comments
+            if user
+                if (user.photo.startsWith("http://res.cloudinary"))
+                    img.nav-user-image(src=`${user.photo}`, alt=`user-image`)
+                else
+                    img.nav-user-image(src=`/img/user/${user.photo}`, alt=`user-image` )
+                .post-comment-write
+                    form.post-comment-form 
+                        p.post-Id= post.id
+                        textarea#comment(name="new-comment", rows="3", placeholder="write your comment here")
+                        button.post-btn Post comment
+            else 
+                a(href="/login")
+                    button.btn Login to comment
+        .display-comments
+            if post.comments
+                each comment in post.comments
+                    .display-comments-container
+                        if (comment.user.photo.startsWith("http://res.cloudinary"))
+                            img.nav-user-image(src=`${comment.user.photo}`, alt=`user-image`)
+                        else
+                            img.nav-user-image(src=`/img/user/${comment.user.photo}`, alt=`user-image` )
+                        .display-comment-details
+                            h2= comment.user.name
+                            h4= `posted at ${comment.createdAt.toLocaleString('en-us',{day:"numeric",month:"short",year:"numeric"})}`
+                            h3= comment.comment
+                        if user
+                            -if(user.role == "admin")
+                                p.post-Id.comment-Id= comment.id
+                                button.btn-deleteComment.btn-delete.tooltip-delete.mg-lauto(data-tooltip="delete")
+                                    i.fa.fa-trash.article-icon.icon-delete
+                            -if(user.role != "admin")
+                                -if (comment.user.id == user.id)
+                                    p.post-Id.comment-Id= comment.id
+                                    button.btn-deleteComment.btn-delete.tooltip-delete.mg-lauto(data-tooltip="delete")
+                                        i.fa.fa-trash.article-icon.icon-delete
+                    hr.comment-end-seperator
+        
+        //- 3. MORE LIKE THESE
+        section#scroll.more-posts
+            h1 More like this
+            #content.post-articles
+                each morePost in morePosts
+                    .post-articles-container
+                        a(href=`./${morePost.slug}`)
+                            if (morePost.imageCover.startsWith("http://res.cloudinary"))
+                                img(src=`${morePost.imageCover}`, alt=`${morePost.imageCover}`)
+                            else
+                                img(src=`/img/cover/${morePost.imageCover}`, alt="Post-image")
+                            h1= morePost.title

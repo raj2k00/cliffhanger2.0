@@ -1,0 +1,113 @@
+extends base
+
+block content 
+
+    section.userArticle-heading
+        .heading-container
+            h1.heading-featured Featured
+            h1.heading-big Write article
+            p.heading-sub
+                | write the details below and click publish once done, but please check
+                | content once again
+    section.form-control
+        p.post-Id= post.id
+        form.form-container.formComposePost
+            h1.form-heading
+                | Publish article by Submitting the form below
+            .form-UserName
+                .form-group
+                    label.form-label(for="fname") User ID
+                    if post.author
+                        input#userid.form-input(type="text", value=`${post.author.id}`, name="userid" ,required)
+                    else 
+                        input#userid.form-input(type="text", value="USER ID", name="userid" ,required)
+            .form-group.form-headline
+                label.form-label(for="heading") Title
+                input#heading.form-input(type="text", value=`${post.title}` ,placeholder="Give a Cachy Title", name="heading", maxlength="80", required)
+            .form-group.form-headline
+                label.form-label(for="subheading") Description
+                input#subheading.form-input(type="text", placeholder="Describe a little about your content (max-100 character)", value=`${post.abstract}` ,name="subheading", maxlength="100", required)
+            -if(post.imageCover)
+                p(class="prevFormValues") Previous Image
+                if (post.imageCover.startsWith("http://res.cloudinary"))
+                    a(href=`${post.imageCover}` download) 
+                        img(class="previousFormImage" ,src=`${post.imageCover}`, alt="previous image")
+                else   
+                    a(href=`/img/cover/${post.imageCover}` download) 
+                        img(class="previousFormImage" ,src=`/img/cover/${post.imageCover}`, alt="previous image")
+            div(class="upload__box form-group")
+                div(class="upload__btn-box")
+                    label(class="upload__btn", for="image")
+                        p Upload header image
+                        input#image(type="file", data-max_length="1", class="upload__inputfile", name="image",required)
+                div(class="upload__img-wrap")
+            -if(post.typeFace)
+                p(class='prevFormValues') previously selected:--
+                    span= post.typeFace
+            .form-group.form-select-tag
+                label(for="select-tag") Choose a Type:
+                select#typeFace.select-item(name="typeFace",required)
+                    option(value="") Please Choose  
+                    option(value="main") Main article
+                    option(value="feature") Featured article
+            -if(post.category)
+                p(class='prevFormValues') previously selected:--
+                    span= post.category
+            .form-group.form-select-tag
+                label(for="select-tag") Choose a category:
+                select#select-tag.select-item(name="category",required)
+                    option(value="") Please Choose 
+                    option(value="science") Science
+                    option(value="technology") Technology
+                    option(value="gaming") Gaming
+                    option(value="entertainment") Entertainment
+                    option(value="general") General
+                    option(value="programming") Programming
+                    option(value="movies") Movies
+                    option(value="anime") Anime
+                    option(value="computer") Computer
+                    option(value="events") Events
+            
+            - if(post.tags.length > 0)
+                p(class='prevFormValues') previously selected:--
+                    span= post.tags
+            .form-group.form-select-tag
+                label Select a Tags:
+                .form-check-box
+                    input#checkbox1(type="checkbox", name="science", value="science" )
+                    | science 
+                    br
+                    input#checkbox2(type="checkbox", name="technology", value="technology")
+                    | technology
+                    br
+                    input#checkbox3(type="checkbox", name="gaming", value="gaming")
+                    | gaming
+                    br
+                    input#checkbox4(type="checkbox", name="entertainment", value="entertainment")
+                    | entertainment
+                    br
+                    input#checkbox5(type="checkbox", name="programming", value="programming")
+                    | programming
+                    br
+                    input#checkbox6(type="checkbox", name="movies", value="movies")
+                    | movies
+                    br
+                    input#checkbox7(type="checkbox", name="anime", value="anime")
+                    | anime
+                    br
+                    input#checkbox8(type="checkbox", name="computer", value="computer")
+                    | computer
+                    br
+                    input#checkbox9(type="checkbox", name="events", value="events")
+                    | events
+            .form-group.form-marked
+                label.form-label(for=" markdown") Write your Article:
+                textarea#markdown.form-marked-text(name="markdown", cols="30", rows="10",  required)= post.markdown 
+                    | and use vscode to check markdown preview ctrl+shift+v
+                    | One more thing please copy the text you type below and paste it to the marked demo
+                    | Delete the following before submitting -( use # followed by space then title to get h1 * more the hashes you get h1 to h6. for links use [&apos;text to be displayed&apos;](link) including pics use {&apos;!&apos;} before the []. for indent use &gt; , for list item use -  )
+            .form-submit-container
+                if post.category
+                   button.btn.form-submit(type="submit") Update
+                else
+                    button.btn.form-submit(type="submit") Publish

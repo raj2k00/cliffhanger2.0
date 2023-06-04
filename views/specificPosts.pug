@@ -1,0 +1,40 @@
+extends base
+
+block content
+     .my-article-content
+            if (!isNaN(parseInt(value)))
+                h2= `More from that Author`
+            else 
+                h2= `Articles with ${category} ${value}`
+            .my-articles
+                each post in posts.results
+                    .blog-item
+                        .blog-container
+                            .blog-image
+                                a(href=`/posts/${post.slug}`)
+                                    if (post.imageCover.startsWith("http://res.cloudinary"))
+                                        img.blog-image--content(src=`${post.imageCover}`, alt=`${post.imageCover}`)
+                                    else
+                                        img.blog-image--content(src=`/img/cover/${post.imageCover}`, alt=`${post.imageCover}`)
+                            .blog-content
+                                a.article-tag.small-text(href=`/search/?category=${post.category}`)= post.category
+                                h1.blog-heading
+                                    a(href=`/posts/${post.slug}`)= post.title
+                                p.blog-subheading= post.abstract
+                                p.blog-created-at= `by ${post.author.name.split(' ')[0]}  ` 
+                                    span.time-stamp= post.createdAt.toLocaleString('en-us',{day:"numeric",month:"short",year:"numeric"})
+                                    if user
+                                        -if(user.role === 'admin') 
+                                            a.tooltip-edit(href="./compose.html", data-tooltip="edit")
+                                                i.fa.fa-edit.article-icon.icon-edit
+                                            button.btn-delete.tooltip-delete(data-tooltip="delete")
+                                                i.fa.fa-trash.article-icon.icon-delete
+                        hr.blog-seperator
+
+            .page-button
+                if posts.previous 
+                    a(href=`/search/?${category}=${value}&page=${posts.previous.page}`) 
+                        button#prev(class="btn btn_prev") Prev Page
+                if posts.next
+                    a(href=`/search/?${category}=${value}&page=${posts.next.page}`) 
+                        button#next(class="btn btn_next") Next Page
